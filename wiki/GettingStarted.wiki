@@ -8,7 +8,7 @@ How to get and build the libyuv code.
 
 You'll need to have depot tools installed:
 
-https://sites.google.com/a/chromium.org/dev/developers/how-tos/depottools
+https://www.chromium.org/developers/how-tos/install-depot-tools
 
 Refer to chromium instructions for each platform for other prerequesites:<br>
 
