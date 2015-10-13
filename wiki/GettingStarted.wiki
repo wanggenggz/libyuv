@@ -49,17 +49,16 @@ To get just the source (not buildable):
 
 == Building the Library and Unittests = 
 
-Note: To build just the library and not the tests, change libyuv_test.gyp to libyuv.gyp
 
 === Windows =
 
 <pre>set GYP_DEFINES=target_arch=ia32 
-call python gyp_libyuv -fninja -G msvs_version=2013 --depth=. libyuv_test.gyp 
+call python gyp_libyuv -fninja -G msvs_version=2013 
 ninja -j7 -C out\Release 
 ninja -j7 -C out\Debug 
 
 set GYP_DEFINES=target_arch=x64
-call python gyp_libyuv -fninja -G msvs_version=2013 --depth=. libyuv_test.gyp
+call python gyp_libyuv -fninja -G msvs_version=2013
 ninja -C out\Debug_x64
 ninja -C out\Release_x64
 </pre>
@@ -76,11 +75,11 @@ ninja -C out\Release
 
 # Clang 64 bit shown.  Remove clang=1 for gcc and change x64 to ia32 for 32 bit <br>
 <pre>
-GYP_DEFINES="clang=1 target_arch=x64" ./gyp_libyuv -fninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="clang=1 target_arch=x64" ./gyp_libyuv  
 ninja -j7 -C out/Debug 
 ninja -j7 -C out/Release 
 
-GYP_DEFINES="clang=1 target_arch=ia32" ./gyp_libyuv -fninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="clang=1 target_arch=ia32" ./gyp_libyuv  
 ninja -j7 -C out/Debug 
 ninja -j7 -C out/Release 
 </pre>
@@ -90,28 +89,28 @@ Add to .gclient last line: target_os=['ios'];
 
 armv7
 <pre>
-GYP_DEFINES="OS=ios target_arch=armv7 target_subarch=arm32" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_ios" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="OS=ios target_arch=armv7 target_subarch=arm32" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_ios" ./gyp_libyuv 
 ninja -j7 -C out_ios/Debug-iphoneos libyuv_unittest
 ninja -j7 -C out_ios/Release-iphoneos libyuv_unittest
 </pre>
 
 arm64
 <pre>
-GYP_DEFINES="OS=ios target_arch=arm64 target_subarch=arm64" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_ios" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="OS=ios target_arch=arm64 target_subarch=arm64" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_ios" ./gyp_libyuv 
 ninja -j7 -C out_ios/Debug-iphoneos libyuv_unittest
 ninja -j7 -C out_ios/Release-iphoneos libyuv_unittest
 </pre>
 
 both armv7 and arm64 (fat)
 <pre>
-GYP_DEFINES="OS=ios target_arch=armv7 target_subarch=both" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_ios" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="OS=ios target_arch=armv7 target_subarch=both" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_ios" ./gyp_libyuv 
 ninja -j7 -C out_ios/Debug-iphoneos libyuv_unittest
 ninja -j7 -C out_ios/Release-iphoneos libyuv_unittest
 </pre>
 
 simulator
 <pre>
-GYP_DEFINES="OS=ios target_arch=ia32 target_subarch=arm32" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_sim" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="OS=ios target_arch=ia32 target_subarch=arm32" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_sim" ./gyp_libyuv 
 ninja -j7 -C out_sim/Debug-iphonesimulator libyuv_unittest
 ninja -j7 -C out_sim/Release-iphonesimulator libyuv_unittest
 </pre>
@@ -122,44 +121,39 @@ Add to .gclient last line: target_os=['android'];
 
 armv7
 <pre>
-GYP_DEFINES="OS=android" GYP_CROSSCOMPILE=1 ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
-ninja -j7 -C out/Debug libyuv_unittest
-ninja -j7 -C out/Release libyuv_unittest
+GYP_DEFINES="OS=android" GYP_CROSSCOMPILE=1 ./gyp_libyuv 
+ninja -j7 -C out/Debug libyuv_unittest_apk
+ninja -j7 -C out/Release libyuv_unittest_apk
 </pre>
 
 arm64
 <pre>
-GYP_DEFINES="OS=android target_arch=arm64" GYP_CROSSCOMPILE=1 ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
-ninja -j7 -C out/Debug libyuv_unittest
-ninja -j7 -C out/Release libyuv_unittest
+GYP_DEFINES="OS=android target_arch=arm64" GYP_CROSSCOMPILE=1 ./gyp_libyuv 
+ninja -j7 -C out/Debug libyuv_unittest_apk
+ninja -j7 -C out/Release libyuv_unittest_apk
 </pre>
 
 ia32
 <pre>
-GYP_DEFINES="OS=android target_arch=ia32" GYP_CROSSCOMPILE=1 ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
-ninja -j7 -C out/Debug libyuv_unittest
-ninja -j7 -C out/Release libyuv_unittest
+GYP_DEFINES="OS=android target_arch=ia32" GYP_CROSSCOMPILE=1 ./gyp_libyuv 
+ninja -j7 -C out/Debug libyuv_unittest_apk
+ninja -j7 -C out/Release libyuv_unittest_apk
 </pre>
 
 mipsel
 <pre>
-GYP_DEFINES="OS=android target_arch=mipsel" GYP_CROSSCOMPILE=1 ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
-ninja -j7 -C out/Debug libyuv_unittest
-ninja -j7 -C out/Release libyuv_unittest
+GYP_DEFINES="OS=android target_arch=mipsel" GYP_CROSSCOMPILE=1 ./gyp_libyuv 
+ninja -j7 -C out/Debug libyuv_unittest_apk
+ninja -j7 -C out/Release libyuv_unittest_apk
 </pre>
 
 arm64 disassembly:
 <pre>
-./third_party/android_tools/ndk//toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-objdump -d out/Release/obj/source/libyuv_neon.row_neon64.o
+./third_party/android_tools/ndk//toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-objdump -d out/Release/obj/source/libyuv.row_neon64.o
 </pre>
 
-Old method:
-<pre>
-source build/android/envsetup.sh
-gclient runhooks
-ninja -j7 -C out/Debug 
-ninja -j7 -C out/Release 
-</pre>
+running test:
+util/android/test_runner.py gtest -s libyuv_unittest --verbose --release --gtest_filter=*
 
 ==== Building with GN = 
 
@@ -175,11 +169,11 @@ ninja -C out/Debug
 
 <pre>
 tools/clang/scripts/update.sh
-GYP_DEFINES="target_arch=x64" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="target_arch=x64" ./gyp_libyuv 
 ninja -j7 -C out/Debug 
 ninja -j7 -C out/Release 
 
-GYP_DEFINES="target_arch=ia32" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="target_arch=ia32" ./gyp_libyuv 
 ninja -j7 -C out/Debug 
 ninja -j7 -C out/Release 
 </pre>
@@ -253,39 +247,6 @@ or Visual Studio 2013<br>
 call "c:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_arm\vcvarsx86_arm.bat"
 nmake /f winarm.mk clean
 nmake /f winarm.mk
-</pre>
-
-== Building the Library with native builds (deprecated) = 
-
-=== Windows =
-
-<pre>
-gclient runhooks 
-devenv -build "Debug" libyuv.sln 
-devenv -build "Release" libyuv.sln 
-</pre>
-=== OSX =
-
-<pre>
-gclient runhooks 
-xcodebuild -project libyuv.xcodeproj -configuration Debug 
-xcodebuild -project libyuv.xcodeproj -configuration Release 
-</pre>
-
-=== Linux =
-
-<pre>
-gclient runhooks 
-make -j7 V=1 -r libyuv BUILDTYPE=Debug 
-make -j7 V=1 -r libyuv BUILDTYPE=Release 
-</pre>
-
-=== iOS =
-
-<pre>
-GYP_DEFINES="OS=ios target_arch=armv7 armv7=1 arm_neon=1" GYP_CROSSCOMPILE=1 ./gyp_libyuv  --depth=. libyuv_test.gyp 
-xcodebuild -project libyuv.xcodeproj -configuration Debug -arch armv7 -sdk iphoneos7.0 
-xcodebuild -project libyuv.xcodeproj -configuration Release -arch armv7 -sdk iphoneos7.0 
 </pre>
 
 === Windows Shared Library =
@@ -364,7 +325,7 @@ http://www.drmemory.org/docs/page_install_windows.html
 
 <pre>
 set GYP_DEFINES=build_for_tool=drmemory target_arch=ia32 
-call python gyp_libyuv -fninja -G msvs_version=2013 --depth=. libyuv_test.gyp 
+call python gyp_libyuv -fninja -G msvs_version=2013 
 ninja -C out\Debug 
 drmemory out\Debug\libyuv_unittest.exe --gtest_catch_exceptions=0 --gtest_filter=* 
 </pre>
@@ -387,7 +348,7 @@ solutions = [
   },
 ]
 
-GYP_DEFINES="clang=0 target_arch=x64 build_for_tool=memcheck" python gyp_libyuv -fninja --depth=. libyuv_test.gyp
+GYP_DEFINES="clang=0 target_arch=x64 build_for_tool=memcheck" python gyp_libyuv 
 ninja -C out/Debug
 valgrind out/Debug/libyuv_unittest
 </pre>
@@ -398,7 +359,7 @@ http://www.chromium.org/developers/how-tos/using-valgrind
 === Running Thread Sanitizer (tsan) =
 
 <pre>
-GYP_DEFINES="clang=0 target_arch=x64 build_for_tool=tsan" python gyp_libyuv -fninja --depth=. libyuv_test.gyp
+GYP_DEFINES="clang=0 target_arch=x64 build_for_tool=tsan" python gyp_libyuv 
 ninja -C out/Debug
 valgrind out/Debug/libyuv_unittest
 </pre>
@@ -409,7 +370,7 @@ http://www.chromium.org/developers/how-tos/using-valgrind/threadsanitizer
 === Running Address Sanitizer (asan) =
 
 <pre>
-GYP_DEFINES="clang=0 target_arch=x64 build_for_tool=asan" python gyp_libyuv -fninja --depth=. libyuv_test.gyp
+GYP_DEFINES="clang=0 target_arch=x64 build_for_tool=asan" python gyp_libyuv 
 ninja -C out/Debug
 valgrind out/Debug/libyuv_unittest
 </pre>
@@ -440,6 +401,36 @@ Indicates 0.547 ms/frame for 1280 x 720.
 
 == Making a change =
 <pre>
+gclient sync
+git checkout -b mycl -t origin/master
+git pull
+<edit files>
+git add -u
+git commit -m "my change"
+git cl lint
+git cl try
+git cl upload -r arevier@chomium.org -s
+<once approved..>
+git cl land
+
+old isntructions:
+this section is out of date. libyuv uses git now. use a chromium build
+instructions when in doubt.
+gclient sync
+make changed
+gcl change mycl
+gcl upload mycl
+requires auth2 once?
+depot-tools-auth login webrtc-codereview.appspot.com
+gcl try mycl
+gcl lint mycl
+gcl commit mycl
+</pre>
+
+<pre>
+old instructions
+this section is out of date.  libyuv uses git now.  use a chromium build
+instructions when in doubt.
 gclient sync
 make changed
 gcl change mycl
