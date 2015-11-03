@@ -128,7 +128,7 @@ ninja -j7 -C out/Release libyuv_unittest_apk
 
 arm64
 <pre>
-GYP_DEFINES="OS=android target_arch=arm64" GYP_CROSSCOMPILE=1 ./gyp_libyuv 
+GYP_DEFINES="OS=android target_arch=arm64 target_subarch=arm64" GYP_CROSSCOMPILE=1 ./gyp_libyuv 
 ninja -j7 -C out/Debug libyuv_unittest_apk
 ninja -j7 -C out/Release libyuv_unittest_apk
 </pre>
