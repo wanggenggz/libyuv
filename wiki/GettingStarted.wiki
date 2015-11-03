@@ -38,7 +38,27 @@ solutions = [
 </pre>
 
 For iOS add ;target_os=['ios']; to your OSX .gclient and run GYP_DEFINES="OS=ios" gclient sync.<br>
-For Android add ;target_os=['android']; to your Linux .gclient and run gclient sync --nohooks<br>
+
+=== Android =
+For Android add ;target_os=['android']; to your Linux .gclient<br>
+
+<pre>
+solutions = [
+  { "name"        : "libyuv",
+    "url"         : "https://chromium.googlesource.com/libyuv/libyuv",
+    "deps_file"   : "DEPS",
+    "managed"     : True,
+    "custom_deps" : {
+    },
+    "safesync_url": "",
+  },
+]
+target_os = ["android", "unix"]
+
+export GYP_DEFINES="OS=android"
+gclient sync
+</pre>
+
 For Windows the gclient sync must be done from an Administrator command prompt.<br>
 
 The sync will generate native build files for your environment using gyp (Windows: Visual Studio, OSX: XCode, Linux: make). This generation can also be forced manually: gclient runhooks
