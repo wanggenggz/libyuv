@@ -157,7 +157,7 @@ arm64 disassembly:
 </pre>
 
 running test:
-util/android/test_runner.py gtest -s libyuv_unittest --verbose --release --gtest_filter=*
+util/android/test_runner.py gtest -s libyuv_unittest -t 7200 --verbose --release --gtest_filter=* -a "--libyuv_width=1280 --libyuv_height=720 --libyuv_repeat=999 --libyuv_flags=-1"
 
 ==== Building with GN = 
 
